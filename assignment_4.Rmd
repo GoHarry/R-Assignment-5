@@ -1,0 +1,57 @@
+---
+title: "Assignment-4"
+author: "Harkirat"
+date: "August 06, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+### This task is to is to use R graphics to describe the data. Three seperate datasets are chosen to draw below plots.
+* histogram
+* boxplot
+* scatterplot
+
+
+#### 1. The first dataset of titanic is used to display one dimensional data of frequency. 
+
+```{r}
+#install.packages(c("ggplot2","RCurl"))
+library(RCurl)
+library(ggplot2)
+
+url1 <- "https://raw.githubusercontent.com/GoHarry/R-Assignment-5/master/Titanic.csv"
+titanic <- getURL(url1)
+titanic_df <- read.csv(text=titanic,head=TRUE,sep=",")
+head(titanic_df)
+ggplot(titanic_df, aes(x=Freq)) + geom_histogram(binwidth=100)
+
+```
+
+
+#### 2. The second dataset of chicken weight is used to display boxplot. Discrete variable feed is used on x axis and weight of chickens are displayed on y axis. This shows clearly that chicken on casein feed have higher weights and chicken on horsebean have lowest weight among other categories. 
+
+```{r}
+
+url2 <- "https://raw.githubusercontent.com/GoHarry/R-Assignment-5/master/chickwts.csv"
+chicken_weight <- getURL(url2)
+chicken_weight_df <- read.csv(text=chicken_weight,head=TRUE,sep=",")
+ggplot(chicken_weight_df, aes(x=feed, y=weight)) + geom_boxplot()
+
+```
+
+
+#### 3. The third dataset of trees is used to display scatterplot. Continuous variable girth is used on x axis and another continuous variable height of trees is displayed on y axis. This shows clearly that height of trees is somewhat proportional to their girth. 
+
+```{r}
+
+url3 <- "https://raw.githubusercontent.com/GoHarry/R-Assignment-5/master/trees.csv"
+trees <- getURL(url3)
+trees_df <- read.csv(text=trees,header=T,sep=",",stringsAsFactors = FALSE)
+ggplot(trees_df, aes(x=Girth, y=Height)) + geom_point()
+
+```
